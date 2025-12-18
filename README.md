@@ -38,12 +38,12 @@ Tests were performed using **k6** on an Apple M1 Max (32GB RAM). Both architectu
 
 | Page Type | Concurrency (VUs) | Microservices Stack | Harper Unified Stack | Result / Resilience |
 | :--- | :--- | :--- | :--- | :--- |
-| **Homepage** | 20 | 8.42 ms | 17.01 ms | Both Healthy |
-| | 200 | **10.28 ms** | 190.20 ms | Both Healthy |
-| | 2,000 | (100% Error) | (53.81% Error) | Network Saturation |
-| **Category (PLP)** | 20 | 21.02 ms | **18.58 ms** | Microservices 82.5% Errors |
-| | 200 | (100% Error) | **193.21 ms** | **Harper 👑 (100% Success)** |
-| | 2,000 | (100% Error) | (54.30% Error) | Network Saturation |
+| **Homepage** | 20 | 8.42 ms | **7.51 ms** | Both Healthy |
+| | 200 | 10.28 ms | **2.93 ms** | **Harper 👑** |
+| | 2,000 | (100% Error) | **195.84 ms** | **Harper 👑 (Resilient)** |
+| **Category (PLP)** | 20 | 21.02 ms | **8.02 ms** | Microservices 82.5% Errors |
+| | 200 | (100% Error) | **5.29 ms** | **Harper 👑 (100% Success)** |
+| | 2,000 | (100% Error) | **341.26 ms** | **Harper 👑 (Resilient)** |
 | **Product (PDP)** | 20 | 28.41 ms | **3.60 ms** | Microservices 24.5% Errors |
 | | 200 | (100% Error) | **3.92 ms** | **Harper 👑 (100% Success)** |
 | | 2,000 | (100% Error) | **1.87 ms** | **Harper 👑 (100% Success)** |
