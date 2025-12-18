@@ -34,13 +34,19 @@ A streamlined architecture utilizing Harper's unified runtime:
 
 Tests were performed using **k6** on an Apple M1 Max (32GB RAM). Both architectures were seeded with ~1,200 unique products and tested across Homepage, PLP (Product List), and PDP (Product Detail) scenarios.
 
-### Key Performance Highlights
+### Performance Results (p50 Latency)
 
-| Page Type | Concurrency (VUs) | Microservices (p50) | Harper (p50) | Delta |
+| Page Type | Concurrency (VUs) | Microservices Stack | Harper Unified Stack | Result / Resilience |
 | :--- | :--- | :--- | :--- | :--- |
-| **PDP (Single Product)** | 50 | 28.41 ms | **3.60 ms** | **-87.3%** |
-| **PDP (Single Product)** | 2,000 | (Unresponsive) | **1.87 ms** | **Harper 👑** |
-| **PLP (Category List)** | 200 | (100% Errors) | **193.21 ms** | **Resilient** |
+| **Homepage** | 20 | 8.42 ms | 17.01 ms | Both Healthy |
+| | 200 | **10.28 ms** | 190.20 ms | Both Healthy |
+| | 2,000 | (100% Error) | (53.81% Error) | Network Saturation |
+| **Category (PLP)** | 20 | 21.02 ms | **18.58 ms** | Microservices 82.5% Errors |
+| | 200 | (100% Error) | **193.21 ms** | **Harper 👑 (100% Success)** |
+| | 2,000 | (100% Error) | (54.30% Error) | Network Saturation |
+| **Product (PDP)** | 20 | 28.41 ms | **3.60 ms** | Microservices 24.5% Errors |
+| | 200 | (100% Error) | **3.92 ms** | **Harper 👑 (100% Success)** |
+| | 2,000 | (100% Error) | **1.87 ms** | **Harper 👑 (100% Success)** |
 
 ### Critical Takeaways
 1. **Network Tax:** Even at low loads, the microservices stack is significantly slower due to the overhead of coordinating multiple internal service calls.
