@@ -24,7 +24,7 @@ A typical distributed architecture built with:
 
 ### 2. Harper Unified Stack
 A streamlined architecture utilizing Harper's unified runtime:
-- **Unified Runtime:** Database, application logic (Custom Functions), and cache coexist in a single process.
+- **Unified Runtime:** Database, application logic, and cache coexist in a single process.
 - **Internal Access:** Application logic interacts with data via direct memory references, eliminating internal network calls and "impedance mismatch."
 - **Typical Driver:** Ideal for high-velocity teams operating "complete functions." It eliminates the coordination friction of traditional technical silos, delivering superior performance, system efficiency, and organizational clarity.
 
