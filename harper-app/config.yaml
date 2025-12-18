@@ -1,0 +1,12 @@
+# This is the configuration file for the application.
+rest: true
+
+graphqlSchema:
+  files: 'schema.graphql'
+
+jsResource:
+  files: 'resources.js'
+  resources: '*'
+
+static:
+  files: 'web/**/*'

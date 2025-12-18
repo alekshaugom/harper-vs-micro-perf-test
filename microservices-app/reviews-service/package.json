@@ -1,0 +1,12 @@
+{
+    "name": "reviews-service",
+    "version": "1.0.0",
+    "main": "server.js",
+    "scripts": {
+        "start": "node server.js"
+    },
+    "dependencies": {
+        "fastify": "^4.29.1",
+        "mongoose": "^7.8.8"
+    }
+}

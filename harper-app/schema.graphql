@@ -1,0 +1,40 @@
+type Product @table @export {
+    id: ID @primaryKey
+    name: String
+    description: String
+    category_id: String @indexed
+    emoji: String
+    category: Category @relationship(from: "category_id")
+    inventory: [Inventory] @relationship(to: "product_id")
+    price: [Price] @relationship(to: "product_id")
+    reviews: [Review] @relationship(to: "product_id")
+}
+
+type Category @table @export {
+    id: ID @primaryKey
+    name: String
+    products: [Product] @relationship(to: "category_id")
+}
+
+type Inventory @table @export {
+    id: ID @primaryKey
+    product_id: String @indexed
+    quantity: Int
+    product: Product @relationship(from: "product_id")
+}
+
+type Price @table @export {
+    id: ID @primaryKey
+    product_id: String @indexed
+    amount: Float
+    currency: String
+    product: Product @relationship(from: "product_id")
+}
+
+type Review @table @export {
+    id: ID @primaryKey
+    product_id: String @indexed
+    rating: Int
+    comment: String
+    product: Product @relationship(from: "product_id")
+}

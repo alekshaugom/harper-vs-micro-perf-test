@@ -1,0 +1,15 @@
+node_modules/
+dist/
+build/
+.env
+*.log
+.DS_Store
+.vscode/
+test-results/
+k6
+harper-app/node_modules/
+microservices-app/catalog-service/node_modules/
+microservices-app/inventory-service/node_modules/
+microservices-app/pricing-service/node_modules/
+microservices-app/reviews-service/node_modules/
+microservices-app/gateway/node_modules/
