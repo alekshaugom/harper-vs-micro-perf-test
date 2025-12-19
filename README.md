@@ -40,7 +40,7 @@ Tests were performed using **k6** on an Apple M1 Max (32GB RAM). Both architectu
 | :--- | :--- | :--- | :--- | :--- |
 | **Homepage** | 20 | 10.21 ms | **6.55 ms** | Both Healthy |
 | | 200 | 15.37 ms | **7.04 ms** | Both Healthy |
-| | 2,000 | 45.45 ms | **15.03 ms** | **Harper 👑** |
+| | 2,000 | 45.45 ms | **15.03 ms** | **Harper 👑 (Resilient)** |
 | **Category (PLP)** | 20 | 59,997.80 ms | **15.68 ms** | -99.9% Latency Gap |
 | | 200 | (100.00% Error) | **44.98 ms** | **Harper 👑 (100% Success)** |
 | | 2,000 | (100.00% Error) | **845.63 ms** | **Harper 👑 (Resilient)** |
@@ -63,9 +63,9 @@ Tests were performed using **k6** on an Apple M1 Max (32GB RAM). Both architectu
 | | 2,000 | (100.00% Error) | **2.01 ms** | **Harper 👑 (100% Success)** |
 
 ### Critical Takeaways
-1. **Network Tax:** Even at low loads, the microservices stack is significantly slower due to the overhead of coordinating multiple internal service calls.
-2. **Resilience Floor:** The microservices stack reached its failure point much earlier than the unified stack, primarily due to the complexity of managing distributed connections under pressure.
-3. **Flat Latency:** Harper’s performance remained remarkably flat as concurrency scaled from 50 to 2,000 concurrent users, demonstrating the efficiency of its memory-integrated data access.
+1. **The Fragmentation Tax:** Even at low loads (20 VUs), the microservices stack shows significantly higher latency. This is the direct result of "network hops" and data serialization between the BFF and the four underlying services.
+2. **The Resilience Ceiling:** The microservices stack reached its failure point abruptly. At 200 VUs, the PLP and PDP scenarios hit a 100% error rate, primarily due to service timeouts and connection exhaustion under the weight of distributed coordination.
+3. **Flat Latency Profile:** Harper’s performance remained remarkably flat as concurrency scaled from 20 to 2,000 concurrent users. This demonstrates the efficiency of a unified runtime where application logic interacts with data via direct memory references rather than internal HTTP calls.
 
 ---
 
@@ -97,7 +97,12 @@ find . -name "package.json" -not -path "*/node_modules/*" -execdir npm install \
    ```
 3. **Execute Benchmark:**
    ```bash
-   cd tests && ./run-suite.sh
+   cd tests
+   # Run the full suite from scratch
+   ./run-suite.sh
+   
+   # OR: Resume an interrupted suite (skips already completed tests)
+   ./resume-suite.sh
    ```
 
 ---
