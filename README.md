@@ -34,19 +34,19 @@ A streamlined architecture utilizing Harper's unified runtime:
 
 Tests were performed using **k6** on an Apple M1 Max (32GB RAM). Both architectures were seeded with ~1,200 unique products and tested across Homepage, PLP (Product List), and PDP (Product Detail) scenarios.
 
-### Performance Results (p50 Latency)
+### Performance Results (p95 Latency)
 
 | Page Type | Concurrency (VUs) | Microservices Stack | Harper Unified Stack | Result / Resilience |
 | :--- | :--- | :--- | :--- | :--- |
-| **Homepage** | 20 | 8.42 ms | **7.51 ms** | Both Healthy |
-| | 200 | 10.28 ms | **2.93 ms** | **Harper 👑** |
-| | 2,000 | (100% Error) | **195.84 ms** | **Harper 👑 (Resilient)** |
-| **Category (PLP)** | 20 | 21.02 ms | **8.02 ms** | Microservices 82.5% Errors |
-| | 200 | (100% Error) | **5.29 ms** | **Harper 👑 (100% Success)** |
-| | 2,000 | (100% Error) | **341.26 ms** | **Harper 👑 (Resilient)** |
-| **Product (PDP)** | 20 | 28.41 ms | **3.60 ms** | Microservices 24.5% Errors |
-| | 200 | (100% Error) | **3.92 ms** | **Harper 👑 (100% Success)** |
-| | 2,000 | (100% Error) | **1.87 ms** | **Harper 👑 (100% Success)** |
+| **Homepage** | 20 | 18.76 ms | **15.47 ms** | Both Healthy |
+| | 200 | **39.85 ms** | 59.74 ms | Both Healthy |
+| | 2,000 | (100% Error) | **326.53 ms** | **Harper 👑 (Resilient)** |
+| **Category (PLP)** | 20 | 54,804.82 ms | **16.99 ms** | -99.9% Latency Gap |
+| | 200 | (100% Error) | **18.33 ms** | **Harper 👑 (100% Success)** |
+| | 2,000 | (100% Error) | **1,075.36 ms** | **Harper 👑 (Resilient)** |
+| **Product (PDP)** | 20 | 51.23 ms | **7.55 ms** | **-85.2% Latency Gap** |
+| | 200 | (100% Error) | **11.01 ms** | **Harper 👑 (100% Success)** |
+| | 2,000 | (100% Error) | **8.78 ms** | **Harper 👑 (100% Success)** |
 
 ### Critical Takeaways
 1. **Network Tax:** Even at low loads, the microservices stack is significantly slower due to the overhead of coordinating multiple internal service calls.
