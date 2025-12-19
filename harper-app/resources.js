@@ -1,7 +1,14 @@
-const { tables, Resource } = require('/usr/local/lib/node_modules/harperdb');
-const { DATA, SAMPLE_ADJECTIVES, emojiToName } = require('../shared-data.js');
+console.log('RESOURCES.JS LOADING...');
+import { DATA, SAMPLE_ADJECTIVES, emojiToName } from './shared-data.js';
+import { Resource, tables } from 'harperdb';
 
 let cachedCatalog = null;
+
+class test extends Resource {
+    async get() {
+        return { ok: true };
+    }
+}
 
 class catalog extends Resource {
     async get(request) {
@@ -194,5 +201,4 @@ class seed extends Resource {
     }
 }
 
-exports.catalog = catalog;
-exports.seed = seed;
+export { catalog, seed, test };

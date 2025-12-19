@@ -38,29 +38,29 @@ Tests were performed using **k6** on an Apple M1 Max (32GB RAM). Both architectu
 
 | Page Type | Concurrency (VUs) | Microservices Stack | Harper Unified Stack | Result / Resilience |
 | :--- | :--- | :--- | :--- | :--- |
-| **Homepage** | 20 | 18.76 ms | **15.47 ms** | Both Healthy |
-| | 200 | **39.85 ms** | 59.74 ms | Both Healthy |
-| | 2,000 | (100% Error) | **326.53 ms** | **Harper 👑 (Resilient)** |
-| **Category (PLP)** | 20 | 54,804.82 ms | **16.99 ms** | -99.9% Latency Gap |
-| | 200 | (100% Error) | **18.33 ms** | **Harper 👑 (100% Success)** |
-| | 2,000 | (100% Error) | **1,075.36 ms** | **Harper 👑 (Resilient)** |
-| **Product (PDP)** | 20 | 51.23 ms | **7.55 ms** | **-85.2% Latency Gap** |
-| | 200 | (100% Error) | **11.01 ms** | **Harper 👑 (100% Success)** |
-| | 2,000 | (100% Error) | **8.78 ms** | **Harper 👑 (100% Success)** |
+| **Homepage** | 20 | 10.21 ms | **6.55 ms** | Both Healthy |
+| | 200 | 15.37 ms | **7.04 ms** | Both Healthy |
+| | 2,000 | 45.45 ms | **15.03 ms** | **Harper 👑** |
+| **Category (PLP)** | 20 | 59,997.80 ms | **15.68 ms** | -99.9% Latency Gap |
+| | 200 | (100.00% Error) | **44.98 ms** | **Harper 👑 (100% Success)** |
+| | 2,000 | (100.00% Error) | **845.63 ms** | **Harper 👑 (Resilient)** |
+| **Product (PDP)** | 20 | 20.43 ms | **7.22 ms** | **-64.6% Latency Gap** |
+| | 200 | (100.00% Error) | **15.90 ms** | **Harper 👑 (100% Success)** |
+| | 2,000 | (100.00% Error) | **41.26 ms** | **Harper 👑 (100% Success)** |
 
 ### Performance Results (p50 Latency)
 
 | Page Type | Concurrency (VUs) | Microservices Stack | Harper Unified Stack | Result / Resilience |
 | :--- | :--- | :--- | :--- | :--- |
-| **Homepage** | 20 | 8.42 ms | **7.51 ms** | Both Healthy |
-| | 200 | 10.28 ms | **2.93 ms** | **Harper 👑** |
-| | 2,000 | (100% Error) | **195.84 ms** | **Harper 👑 (Resilient)** |
-| **Category (PLP)** | 20 | 21.02 ms | **8.02 ms** | Microservices 82.5% Errors |
-| | 200 | (100% Error) | **5.29 ms** | **Harper 👑 (100% Success)** |
-| | 2,000 | (100% Error) | **341.26 ms** | **Harper 👑 (Resilient)** |
-| **Product (PDP)** | 20 | 28.41 ms | **3.60 ms** | Microservices 24.5% Errors |
-| | 200 | (100% Error) | **3.92 ms** | **Harper 👑 (100% Success)** |
-| | 2,000 | (100% Error) | **1.87 ms** | **Harper 👑 (100% Success)** |
+| **Homepage** | 20 | 7.25 ms | **2.94 ms** | Both Healthy |
+| | 200 | 7.07 ms | **0.88 ms** | **Harper 👑** |
+| | 2,000 | 2.31 ms | **0.73 ms** | **Harper 👑** |
+| **Category (PLP)** | 20 | 40,740.46 ms | **5.04 ms** | Microservices 35.3% Errors |
+| | 200 | (100.00% Error) | **3.13 ms** | **Harper 👑 (100% Success)** |
+| | 2,000 | (100.00% Error) | **244.69 ms** | **Harper 👑 (Resilient)** |
+| **Product (PDP)** | 20 | 8.62 ms | **3.12 ms** | Microservices 3.3% Errors |
+| | 200 | (100.00% Error) | **1.39 ms** | **Harper 👑 (100% Success)** |
+| | 2,000 | (100.00% Error) | **2.01 ms** | **Harper 👑 (100% Success)** |
 
 ### Critical Takeaways
 1. **Network Tax:** Even at low loads, the microservices stack is significantly slower due to the overhead of coordinating multiple internal service calls.
@@ -92,7 +92,7 @@ find . -name "package.json" -not -path "*/node_modules/*" -execdir npm install \
    ```
 2. **Start Harper:**
    ```bash
-   cd harper-app && node standalone-server.js
+   cd harper-app && npm start
    # Seed data: curl -X POST http://localhost:9926/seed
    ```
 3. **Execute Benchmark:**

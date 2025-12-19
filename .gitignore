@@ -1,15 +1,33 @@
-node_modules/
+# Dependencies
+**/node_modules/
+
+# Environment
+.env
+.env.local
+
+# Build outputs
 dist/
 build/
-.env
-*.log
-.DS_Store
-.vscode/
 test-results/
+
+# System
+.DS_Store
+**/.DS_Store
+.vscode/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Binaries
 k6
-harper-app/node_modules/
-microservices-app/catalog-service/node_modules/
-microservices-app/inventory-service/node_modules/
-microservices-app/pricing-service/node_modules/
-microservices-app/reviews-service/node_modules/
-microservices-app/gateway/node_modules/
+
+# HarperDB Runtime Files
+**/*.pid
+**/harper-application-lock.json
+**/keys/
+**/backup/
+**/database/
+**/hdb/
