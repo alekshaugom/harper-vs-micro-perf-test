@@ -48,6 +48,20 @@ Tests were performed using **k6** on an Apple M1 Max (32GB RAM). Both architectu
 | | 200 | (100% Error) | **11.01 ms** | **Harper 👑 (100% Success)** |
 | | 2,000 | (100% Error) | **8.78 ms** | **Harper 👑 (100% Success)** |
 
+### Performance Results (p50 Latency)
+
+| Page Type | Concurrency (VUs) | Microservices Stack | Harper Unified Stack | Result / Resilience |
+| :--- | :--- | :--- | :--- | :--- |
+| **Homepage** | 20 | 8.42 ms | **7.51 ms** | Both Healthy |
+| | 200 | 10.28 ms | **2.93 ms** | **Harper 👑** |
+| | 2,000 | (100% Error) | **195.84 ms** | **Harper 👑 (Resilient)** |
+| **Category (PLP)** | 20 | 21.02 ms | **8.02 ms** | Microservices 82.5% Errors |
+| | 200 | (100% Error) | **5.29 ms** | **Harper 👑 (100% Success)** |
+| | 2,000 | (100% Error) | **341.26 ms** | **Harper 👑 (Resilient)** |
+| **Product (PDP)** | 20 | 28.41 ms | **3.60 ms** | Microservices 24.5% Errors |
+| | 200 | (100% Error) | **3.92 ms** | **Harper 👑 (100% Success)** |
+| | 2,000 | (100% Error) | **1.87 ms** | **Harper 👑 (100% Success)** |
+
 ### Critical Takeaways
 1. **Network Tax:** Even at low loads, the microservices stack is significantly slower due to the overhead of coordinating multiple internal service calls.
 2. **Resilience Floor:** The microservices stack reached its failure point much earlier than the unified stack, primarily due to the complexity of managing distributed connections under pressure.
